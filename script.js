@@ -5,7 +5,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     const password = document.getElementById("password").value;
 
     // Google Apps Scriptに送信（★ここが重要）
-    fetch("https://script.google.com/macros/s/XXXXXXXXXXXXXXXXXXXXXXXX/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxl8RgZaGHVI5DngnM3Pw-sS2HVwhYexx8jtRzIPiSSZ4SjD0k2ksJmY5gOtEcr6Zqxbg/exec", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
