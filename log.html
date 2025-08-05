@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ログインログ</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #log-table { display: none; width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+  </style>
+</head>
+<body>
+
+<h1>開発者ログページ</h1>
+
+<div id="auth">
+  <p>このページは開発者専用です。パスワードを入力してください。</p>
+  <input type="password" id="passwordInput" placeholder="パスワード" />
+  <button onclick="checkPassword()">確認</button>
+  <p id="errorMsg" style="color:red;"></p>
+</div>
+
+<table id="log-table">
+  <thead>
+    <tr><th>日時</th><th>名前</th><th>パスワード</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  const correctPassword = "Suraimu9271"; // ←好きなパスワードに変更！
+
+  function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    if (input === correctPassword) {
+      document.getElementById("auth").style.display = "none";
+      document.getElementById("log-table").style.display = "table";
+
+      const logs = JSON.parse(localStorage.getItem("loginLogs")) || [];
+      const tbody = document.querySelector("#log-table tbody");
+      logs.forEach(log => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${log.time}</td><td>${log.username}</td><td>${log.password}</td>`;
+        tbody.appendChild(tr);
+      });
+    } else {
+      document.getElementById("errorMsg").textContent = "パスワードが間違っています。";
+    }
+  }
+</script>
+
+</body>
+</html>
